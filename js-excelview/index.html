@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="renderer" content="webkit" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="index,follow" />
+    <title>excel在线预览</title>
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+  </head>
+  <body>
+    <div id="excelview">
+    </div>
+    <div id="excelview-btn"></div>
+    <div id="btn">
+      <button type="button">获取excel在线预览</button>
+    </div>
+    <script src="dist/jquery.min.js"></script>
+    <!-- <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script> -->
+    <script src="dist/xlsx.full.min.js"></script>
+    <script src="dist/canvas-datagrid.js"></script>
+    <script src="dist/exceviewl.js"></script>
+    <script>
+      // function str2ab(str) {
+      //     var buf = new ArrayBuffer(str.length*2); // 每个字符占用2个字节
+      //     var bufView = new Uint16Array(buf);
+      //     for (var i=0, strLen=str.length; i<strLen; i++) {
+      //         bufView[i] = str.charCodeAt(i);
+      //     }
+      //     return buf;
+      // }
+      $("#btn button").click(function(){
+        // ajax是基于xhr第一版本的，而ArrayBuffer是基于xhr第二版本的
+        var url = 'http://demo.haoji.me/2017/02/08-js-xlsx/sample/sample.xlsx'
+        // $.ajax({
+        //   url: 'http://demo.haoji.me/2017/02/08-js-xlsx/sample/sample.xlsx',
+        //   type: 'get',
+        //   // xhrFields: { responseType: "arraybuffer" },
+        //   dataType: 'text',
+        //   xhr: function(a,b) {
+        //     console.log(a,b);
+            
+        //   },
+        //   // dataFilter: function (data,type) {
+        //     // }
+        //     success: function (res) {
+        //       // console.log(res);
+        //         console.log(str2ab(res))
+        //     // readWorkbook(res)
+        //   }
+        // })
+        var xhr = new XMLHttpRequest();
+        xhr.open('get', url, true);
+        xhr.responseType = 'arraybuffer';
+        xhr.onload = function(e) {
+          if(xhr.status == 200) {
+            readWorkbook(xhr.response, '#excelview', '#excelview-btn')
+          }
+        };
+        xhr.send();
+      })
+
+
+      // var grid = canvasDatagrid();
+      // document.body.appendChild(grid);
+      // grid.data = [
+      //     {col1: 'row 1 column 1', col2: 'row 1 column 2', col3: 'row 1 column 3'},
+      //     {col1: 'row 2 column 1', col2: 'row 2 column 2', col3: 'row 2 column 3'}
+      // ];
+    </script>
+  </body>
+</html>
