@@ -14,7 +14,7 @@
     "axios": "^0.19.2",
     "canvas-datagrid": "^0.22.13",
     "vue": "^2.5.11",
-    "xlsx": "^0.16.0"
+    "xlsx": "^0.17.0"
   },
   "browserslist": [
     "> 1%",
